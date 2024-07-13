@@ -66,13 +66,14 @@ namespace activeOrNotActive.Controllers
         [HttpPost]
         public IActionResult Create(Employee employee,IFormFile file)
         {
-            if (employee != null) { 
+            if (employee != null && file!=null) { 
             var path = Path.Combine(env.WebRootPath, "Image", file.FileName);
 
             using (var stream = new FileStream(path,FileMode.Create))
             {
                 file.CopyTo(stream);
             }
+
             employee.imgPath = path;
             employee.imgname = file.FileName;
 
@@ -97,7 +98,7 @@ namespace activeOrNotActive.Controllers
         {
             if (employee != null)
             {
-                var oldpath = Path.Combine(env.WebRootPath,"Image",employee.imgname);
+                var oldpath = employee.imgPath;
                 var newpath = Path.Combine(env.WebRootPath,"Image",file.FileName);
                 if (System.IO.File.Exists(oldpath))
                 {
@@ -123,11 +124,6 @@ namespace activeOrNotActive.Controllers
             }
             return RedirectToAction("Index");   
         }
-
-       
-
-
-
 
     }
 }
