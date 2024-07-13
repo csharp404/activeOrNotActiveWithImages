@@ -1,0 +1,46 @@
+﻿@model IEnumerable<activeOrNotActive.Models.Department>
+
+<a asp-action="Create" class="btn btn-outline-dark">Create</a>
+<a asp-action="Index" asp-controller="Employee" class="btn btn-outline-primary">Employees</a>
+
+<table class="table">
+    <tr>
+        <td>@Html.DisplayNameFor(x => x.Id)</td>
+        <td>@Html.DisplayNameFor(x => x.Name)</td>
+        <td>Employees</td>
+        <td>Actions</td>
+
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(x => item.Id)</td>
+            <td>@Html.DisplayFor(x => item.Name)</td>
+            <td>
+                @Html.DropDownList("Employees", new SelectList(item.Employees, "Id", "Name"), "Employees In This Department", new { @class = "form-control" })
+
+
+            </td>
+            <td>
+                @Html.ActionLink("Update", "Edit", new { Id = item.Id }, new { @class = "btn btn-info" })
+                @Html.ActionLink(
+                         "Delete",
+                         "Delete",
+                         new { Id = item.Id },
+                         new
+                         {
+                             @class = "btn btn-danger",
+                             onclick = "return confirm('Are you sure all employees in this department will be Deleted?');"
+                         }
+                         )
+
+
+
+            </td>
+        </tr>
+
+    }
+
+
+</table>

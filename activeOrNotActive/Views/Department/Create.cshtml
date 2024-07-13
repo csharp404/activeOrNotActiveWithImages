@@ -1,0 +1,19 @@
+﻿@model activeOrNotActive.Models.Department
+@{
+
+    var ActionName = Model == null ? "Create" : "Edit";
+
+
+}
+
+<form asp-action="@ActionName">
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

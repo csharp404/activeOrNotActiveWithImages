@@ -1,0 +1,54 @@
+﻿@model activeOrNotActive.Models.Employee
+@{
+  
+    var ActionName = Model == null ? "Create" : "Edit";
+
+
+}
+
+<form asp-action="@ActionName" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Salary"></label>
+        <input asp-for="Salary" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IsActive"></label>
+        <div class="form-check">
+            <input type="radio" asp-for="IsActive" value="true" class="form-check-input" id="IsActiveTrue" />
+            <label class="form-check-label" for="IsActiveTrue">Active</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" asp-for="IsActive" value="false" class="form-check-input" id="IsActiveFalse" />
+            <label class="form-check-label" for="IsActiveFalse">NonActive</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Department"></label>
+        <select asp-for="DpartmentId" asp-items="@(new SelectList(ViewBag.dep, "Id", "Name"))" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label for="file"></label>
+        <input type="file" name="file" for="file" />
+
+    </div>
+    <div class="form-group hidden">
+        <input type="hidden" asp-for="imgPath" />
+
+    </div>
+    <div class="form-group hidden">
+       
+        <input type="hidden" asp-for="imgname" />
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

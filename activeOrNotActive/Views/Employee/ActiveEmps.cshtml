@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Employee>
+
+<a asp-action="ActiveEmps" asp-route-id="1" class="btn btn-success">Active Employees</a>
+<a asp-action="ActiveEmps" asp-route-id="0" class="btn btn-danger">Not Active Employees</a>
+
+<table class="table">
+    <tr>
+        <td>@Html.DisplayNameFor(x => x.Id)</td>
+        <td>@Html.DisplayNameFor(x => x.Name)</td>
+        <td>@Html.DisplayNameFor(x => x.Salary)</td>
+        <td>@Html.DisplayNameFor(x => x.IsActive)</td>
+        <td>@Html.DisplayNameFor(x => x.Department.Name)</td>
+        <td>Actions</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(x => item.Id)</td>
+            <td>@Html.DisplayFor(x => item.Name)</td>
+            <td>@Html.DisplayFor(x => item.Salary)</td>
+            <td>
+                @if (item.IsActive)
+                    @Html.ActionLink("Active", "NonActive", new { Id = item.Id }, new { @class = "btn btn-success" })
+                else
+                    @Html.ActionLink("NotActive", "Active", new { Id = item.Id }, new { @class = "btn btn-danger" })
+
+
+
+            </td>
+            <td>@Html.DisplayFor(x => item.Department.Name)</td>
+            <td>
+                @Html.ActionLink("Delete", "NonActive", new { Id = item.Id }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Upadte", "NonActive", new { Id = item.Id }, new { @class = "btn btn-success" })
+            </td>
+        </tr>
+    }
+</table>
